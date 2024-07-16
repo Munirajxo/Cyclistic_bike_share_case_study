@@ -96,12 +96,20 @@ summary(all_trips_v3)
 ![Summary_v3](https://github.com/user-attachments/assets/9ca83eb3-7059-46e7-bead-f1e8fe0d3cee)
 
 ### Analyze
-No_of_rides_monthwise
+1. No_of_rides_monthwise
+
+
 ![monthly_rides](https://github.com/user-attachments/assets/7b986098-ecf8-49e4-8627-68a242bfe144)
-member_casual_rides
+
+
+2. member_casual_rides
+
+
 ![member_casual_rides](https://github.com/user-attachments/assets/d0fbe704-f7d4-41fa-97b5-48891484dec2)
 
-Findings:
+
+
+3. Findings:
 1. Membership rider's trip is longer than casual ones regardless of the season or day
 2. All users take longer trips over weekend and summer
 3. While 6% of casual riders return their bike to their start point station,
@@ -109,13 +117,26 @@ Findings:
 
 ### Share
 ---
-Members vs Casual 
+- Members vs Casual 
+
 1. Ridedistance and count
+
+   
 ![ride_dis and count](https://github.com/user-attachments/assets/0c452c34-0ee9-476b-ad71-b3d3ba42e4c0)
+
+
 2. Weekly ride_distance
+
+
 ![avg_ride_distance_week](https://github.com/user-attachments/assets/12d878a1-9bea-4d05-b7bd-2dc1b269e358)
-3. Monthly ride distance
+
+
+4. Monthly ride distance
+
+
 ![avg_ride_dis_month](https://github.com/user-attachments/assets/6f1c4706-0c6e-49b9-8129-79ae2d6b4f84)
+
+
 
 - It seems that the casual users travel the same average distance than the member users, but they have relatively longer rides, that would indicate a more leisure oriented usage vs a more "public transport" or pragmatic use of the bikes by the annual members.
 -  Casual riders are more likely to return their bikes at the same station.

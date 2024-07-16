@@ -51,7 +51,7 @@ In this assignment, I will produce a report with the following deliverables:
 
 #### About the data set:
 
-Since Cyclistic is a fictional company, I will use Divvy’s, a bike-share program based in Chicago, data from May 2022 – April 2023 to complete this case study. To download the data, [https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis](#https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis). This data was made public by Motivate International Inc, under this license. Due to data privacy issues, personal information has been removed or encrypted.
+Since Cyclistic is a fictional company, I will use Divvy’s, a bike-share program based in Chicago, data from May 2022 – April 2023 to complete this case study. To download the data, [https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis](https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis). This data was made public by Motivate International Inc, under this license. Due to data privacy issues, personal information has been removed or encrypted.
 ```
 library(tidyverse)  #helps wrangle data
 library(lubridate)  #helps wrangle date attributes

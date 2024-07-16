@@ -19,21 +19,14 @@ In this case study, I am going to follow "The APPASA process" (Ask - Prepare - P
 
 I am a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, my team wants to understand how casual riders and annual members use Cyclistic bikes differently. From these insights, my team will design a new marketing strategy to convert casual riders into annual members.
 
-#### About the company
-
-In 2016, Cyclistic launched a successful bike-share oering. Since then, the program has grown to a fleet of 5,824 bicycles that are geotracked and locked into a network of 692 stations across Chicago. The bikes can be unlocked from one station and returned to any other station in the system anytime. Until now, Cyclistic’s marketing strategy relied on building general awareness and appealing to broad consumer segments. One approach that helped make these things possible was the flexibility of its pricing plans: single-ride passes, full-day passes, and annual memberships. Customers who purchase single-ride or full-day passes are referred to as casual riders. Customers who purchase annual memberships are Cyclistic members. Cyclistic’s finance analysts have concluded that annual members are much more profitable than casual riders. Although the pricing flexibility helps Cyclistic attract more customers, The director of marketing believes that maximizing the number of annual members will be key to future growth. Rather than creating a marketing campaign that targets all-new customers, she believes there is a very good chance to convert casual riders into members. She notes that casual riders are already aware of the Cyclistic program and have chosen Cyclistic for their mobility needs.
-
 ### The goal of this case study
-
 Three questions will guide the future marketing program:
-
 1. How do annual members and casual riders use Cyclistic bikes differently?
 2. Why would casual riders buy Cyclistic annual memberships?
 3. How can Cyclistic use digital media to influence casual riders to become members?
 The director of marketing has assigned me the first question to answer: How do annual members and casual riders use Cyclistic bikes differently?
 
 In this assignment, I will produce a report with the following deliverables:
-
 1. A clear statement of the business task
 2. A description of all data sources used
 3. Documentation of any cleaning or manipulation of data
@@ -59,78 +52,67 @@ In this assignment, I will produce a report with the following deliverables:
 
 #### About the data set:
 
-Since Cyclistic is a fictional company, I will use Divvy’s, a bike-share program based in Chicago, data from May 2022 – April 2023 to complete this case study. To download the data, [please use this link](#https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis). This data was made public by Motivate International Inc, under this license. Due to data privacy issues, personal information has been removed or encrypted.
+Since Cyclistic is a fictional company, I will use Divvy’s, a bike-share program based in Chicago, data from May 2022 – April 2023 to complete this case study. To download the data, [https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis](#https://www.kaggle.com/datasets/munirajmallesan/cyclistic-bike-share-analysis). This data was made public by Motivate International Inc, under this license. Due to data privacy issues, personal information has been removed or encrypted.
+```
+library(tidyverse)  #helps wrangle data
+library(lubridate)  #helps wrangle date attributes
+library(ggplot2)  #helps visualize data
+library(dplyr) #helps clean data
+library(tidyr) #helps clean data
+library(geosphere)
+# Read the trip data from 202205 - 202304 (12 months)
+tripdata_2022_05 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202205-divvy-tripdata_1.csv")
+tripdata_2022_06 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202206-divvy-tripdata_2.csv")
+tripdata_2022_07 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202207-divvy-tripdata_3.csv")
+tripdata_2022_08 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202208-divvy-tripdata_4.csv")
+tripdata_2022_09 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202209-divvy-publictripdata_5.csv")
+tripdata_2022_10 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202210-divvy-tripdata_6.csv")
+tripdata_2022_11 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202211-divvy-tripdata_7.csv")
+tripdata_2022_12 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202212-divvy-tripdata_8.csv")
+tripdata_2023_01 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202301-divvy-tripdata_9.csv")
+tripdata_2023_02 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202302-divvy-tripdata_10.csv")
+tripdata_2023_03 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202303-divvy-tripdata_11.csv")
+tripdata_2023_04 <- read.csv("/kaggle/input/cyclistic-bike-share-analysis/202304-divvy-tripdata_12.csv")
 
-add Codeadd Markdown
-### Data Cleaning
+#Combine all the data sets
+all_trips <- bind_rows(tripdata_2022_05, tripdata_2022_06, tripdata_2022_07, tripdata_2022_08, tripdata_2022_09, tripdata_2022_10, tripdata_2022_11, tripdata_2022_12, tripdata_2023_01, tripdata_2023_02, tripdata_2023_03, tripdata_2023_04)
+```
+### Process
 ---
-In the initial preparation phase, We performed following tasks:
-1. Build and connected a database.
-2. Cleand and organized data using sql queries .
-3. Data cleaning and formatting.
-   
-### Explotary Data Analysis 
----
-EDA involved exploring the data to answer questions such as:
-- Finding the healthiest employees for bonus?
-- Wage increase for the non-smokers?
-- Finding the reason for absenteeism?
+Data Cleaning before conducting analysis
+Due to the large data set, I will use R for data cleaning and data analysis.
+```
+colnames(all_trips)  #List of column names
+nrow(all_trips)  #How many rows are in data frame?
+dim(all_trips)  #Dimensions of the data frame?
 
-### Data Analysis 
+Remove bad data
+1. Remove ride length is less than 0 second and is > 1440 minutes as ride length shouldn't be either negative or more than one day
+ # Remove "bad" data
+# The dataframe includes a few hundred entries when bikes were taken out of docks and checked for quality by Divvy or ride_length was negative
+#Create a new data frame without records that have ride length <= zero minute OR > 1440 minutes
+all_trips_v2 <- all_trips[!(all_trips$ride_length <= 0 | all_trips$ride_length > 1440),]
+summary(all_trips_v3)
+```
+### Analyze
+---
+
+
+
+```
+
+
+```
+- Findings:
+
+1. While Casual rider has slightly longer distance trip on weekday, membership ride's slighly longer over weekend.
+2. All users take slightly longer distance trip in Spring
+3. While 6% of casual riders return their bike to their start point station, 4% of membership rider returns at their start point station.
+
+### Share
 ---
 ```
---Create a join table
-use work
-select * From Absenteeism_at_work a
-left join compensation b
-on a. ID = b. ID 
-left join Reasons r on
-a. Reason_for_absence = r.Number ;
 
---- find the healthiest Employees for the bonus 
-select * From Absenteeism_at_work
-where Social_drinker = 0 and Social_smoker = 0 
-and Body_mass_index <25 and
-Absenteeism_time_in_hours < (select AVG (Absenteeism_time_in_hours) from Absenteeism_at_work)
-
---- compansation rate increase for non-smoker / budget $ 983,221 do .68 increase per hour / $1414.4 increase per year 
-select count(*) as nonsmookers from Absenteeism_at_work
-where Social_smoker = 0;
-
---Optimize this query 
-select 
-a . ID,
-r. Reason,
-Month_of_absence,
-Body_mass_index,
-CASE WHEN Body_mass_index < 18.5 then 'UnderWeight'
-     WHEN Body_mass_index between 18.5 and 25 then 'HealthyWeight'
-     WHEN Body_mass_index between 25 and 30 then 'OverWeight'
-     WHEN Body_mass_index > 30 then 'Obese'
-	 ELSE 'Unknown' end as BMI_Category,
-CASE WHEN Month_of_absence IN (12,1,2) then 'Winter'
-     WHEN Month_of_absence IN (3,4,5) then 'Spring'
-     WHEN Month_of_absence IN (6,7,8) then 'Summer'
-     WHEN Month_of_absence IN (9,10,11) then 'Fall'
-		  ELSE 'Unkown' END as Season_Names,
-		  Seasons,
-		  Month_of_absence,
-		  Day_of_the_week,
-		  Transportation_expense,
-		  Education,
-		  Son,
-		  Social_drinker,
-		  Social_smoker,
-		  Pet,
-		  Disciplinary_failure,
-		  Age,
-		  Work_load_Average_day,
-		  Absenteeism_time_in_hours
-From Absenteeism_at_work a
-left join compensation b
-on a.ID = b.ID 
-left join Reasons r on
-a. Reason_for_absence = r.Number ;
 ```
 - Joined Tables: Combined Absenteeism,Reasons, and Compensation tables using SQL joins.
 - Aggregate Functions: Calculated average wage increases with functions like AVG.
